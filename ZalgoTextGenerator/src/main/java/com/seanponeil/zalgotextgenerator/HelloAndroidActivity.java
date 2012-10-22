@@ -1,8 +1,12 @@
 package com.seanponeil.zalgotextgenerator;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
+import android.webkit.WebView;
+import android.widget.TextView;
 
 public class HelloAndroidActivity extends Activity {
 
@@ -19,6 +23,11 @@ public class HelloAndroidActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
         setContentView(R.layout.main);
+
+        TextView tv = (TextView) findViewById(R.id.hello);
+        //tv.setTypeface(Typeface.createFromAsset(getAssets(), "DejaVuSans.ttf"));
+
+        tv.setText(Html.fromHtml(ZalgoString.generate("Welcome to Zalgo Text")));
     }
 
 }

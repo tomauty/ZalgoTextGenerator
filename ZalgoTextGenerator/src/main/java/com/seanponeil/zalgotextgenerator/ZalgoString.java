@@ -1,5 +1,7 @@
 package com.seanponeil.zalgotextgenerator;
 
+import java.util.Random;
+
 /**
  *  Utility class for transforming a given String into a
  * "Zalgo" String.
@@ -80,7 +82,7 @@ public class ZalgoString {
             '\u0489' /*     ҉_     */
     };
 
-    public static boolean isZalgo(char c){
+    private static boolean isZalgo(char c){
         for(int i=0; i<UP_CHARS.length; i++){
             if(c == UP_CHARS[i]){
                 return true;
@@ -97,6 +99,52 @@ public class ZalgoString {
             }
         }
         return false;
+    }
+
+    public static String generate(String source){
+        StringBuilder result = new StringBuilder();
+        Random rand = new Random(System.currentTimeMillis());
+
+        for(int i=0; i<source.length(); i++){
+            if(isZalgo(source.charAt(i))){
+                continue;
+            }else{
+                result.append(source.charAt(i));
+            }
+
+            //TODO: Make these values come from user preferences, probably a slider
+            int upCharCount = rand.nextInt(16);
+            int downCharCount = rand.nextInt(6);
+            int midCharCount = rand.nextInt(16);
+
+            for(int j=0; j<upCharCount; j++){
+                result.append(UP_CHARS[rand.nextInt(UP_CHARS.length)]);
+            }
+            for(int j=0; j<downCharCount; j++){
+                result.append(DOWN_CHARS[rand.nextInt(DOWN_CHARS.length)]);
+            }
+            for(int j=0; j<midCharCount; j++){
+                result.append(MID_CHARS[rand.nextInt(MID_CHARS.length)]);
+            }
+        }
+
+        return result.toString();
+    }
+
+    public static String generateHTML(String source){
+        StringBuilder result = new StringBuilder();
+        result.append("<html>").append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />")
+                .append("<head><style type=\"text/css\">")
+                .append("@font-face {")
+                .append("font-family: GNUnicode;")
+                .append("src: url(\"file:///android_asset/unifont.ttf\") }")
+                .append("body {")
+                .append("font-family: GNUnicode;")
+                .append("}")
+                .append("</style></head>")
+                .append("<body>").append(generate(source))
+                .append("</body>").append("</html>");
+        return result.toString();
     }
 
 
