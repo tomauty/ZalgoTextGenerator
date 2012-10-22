@@ -11,6 +11,7 @@
             android:layout_weight="1"
             android:ellipsize="none"
             android:maxLines="100"
+            android:lines="20"
             android:scrollHorizontally="false"
             android:text="@string/hello"
             android:textIsSelectable="true"

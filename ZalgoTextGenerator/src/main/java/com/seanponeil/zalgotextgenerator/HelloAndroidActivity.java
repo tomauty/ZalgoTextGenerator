@@ -22,12 +22,11 @@ public class HelloAndroidActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
-        setContentView(R.layout.main);
+        WebView wv = new WebView(this);
+        setContentView(wv);
 
-        TextView tv = (TextView) findViewById(R.id.hello);
-        //tv.setTypeface(Typeface.createFromAsset(getAssets(), "DejaVuSans.ttf"));
+        wv.loadDataWithBaseURL("file:///android_asset/", ZalgoString.generateHTML("Welcome to Zalgo Text"),"text/html", "utf-8", null);
 
-        tv.setText(Html.fromHtml(ZalgoString.generate("Welcome to Zalgo Text")));
     }
 
 }
