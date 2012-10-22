@@ -6,7 +6,7 @@ An Android app to easily generate Zalgo text strings and share them with other A
 Compilation
 -----------
 
-Retrofit is built using Maven and there is a very minimal amount of setup required for compilation.
+ZalgoTextGenerator is built using Maven and there is a very minimal amount of setup required for compilation.
 
 Two environment variables are required which point to your Android SDK and native Android SDK. A common
 place to put these is in a `.bash_profile` file in your home directory.
